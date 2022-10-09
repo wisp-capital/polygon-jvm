@@ -13,7 +13,7 @@ suspend fun PolygonReferenceClient.getSupportedTickers(
     polygonClient.fetchResult {
         path("v3", "reference", "tickers")
 
-        params.ticker?.let { parameters["ticker"] = it }
+        params.ticker.let { parameters["ticker"] = it }
         params.tickerLT?.let { parameters["ticker.lt"] = it }
         params.tickerLTE?.let { parameters["ticker.lte"] = it }
         params.tickerGT?.let { parameters["ticker.gt"] = it }
@@ -31,8 +31,8 @@ suspend fun PolygonReferenceClient.getSupportedTickers(
         } else {
             "asc"
         }
-        params.sortBy?.let { parameters["sort"] = it.toString() }
-        params.limit?.let { parameters["limit"] = it.toString() }
+        params.sortBy.let { parameters["sort"] = it }
+        params.limit.let { parameters["limit"] = it.toString() }
     }
 
 @Builder
