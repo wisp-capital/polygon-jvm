@@ -51,7 +51,7 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
             groupId = "com.github.wisp-capital"
-            artifactId = "color-console"
+            artifactId = "polygon-jvm"
             version = "3.0.4"
 
             from(components["java"])
