@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package io.polygon.kotlin.sdk.rest.forex
 
 import io.polygon.kotlin.sdk.ext.coroutineToRestCallback
@@ -23,11 +25,14 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getHistoricTicksBlocking(params: HistoricTicksParameters): HistoricTicksDTO =
         runBlocking { getHistoricTicks(params) }
-    
+
     /** See [getHistoricTicksBlocking] */
-    fun getHistoricTicks(params: HistoricTicksParameters, callback: PolygonRestApiCallback<HistoricTicksDTO>) =
+    fun getHistoricTicks(
+        params: HistoricTicksParameters,
+        callback: PolygonRestApiCallback<HistoricTicksDTO>
+    ) =
         coroutineToRestCallback(callback, { getHistoricTicks(params) })
-    
+
     /**
      * Convert currencies using the latest market conversion rates.
      * Note than you can convert in both directions. For example USD->CAD or CAD->USD.
@@ -36,11 +41,14 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getRealTimeConversionBlocking(params: RealTimeConversionParameters): RealTimeConversionDTO =
         runBlocking { getRealTimeConversion(params) }
-    
+
     /** See [getRealTimeConversionBlocking] */
-    fun getRealTimeConversion(params: RealTimeConversionParameters, callback: PolygonRestApiCallback<RealTimeConversionDTO>) =
+    fun getRealTimeConversion(
+        params: RealTimeConversionParameters,
+        callback: PolygonRestApiCallback<RealTimeConversionDTO>
+    ) =
         coroutineToRestCallback(callback, { getRealTimeConversion(params) })
-    
+
     /**
      * Get Last Quote Tick for a Currency Pair.
      *
@@ -48,11 +56,15 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getLastQuoteBlocking(fromCurrency: String, toCurrency: String): LastQuoteForexDTO =
         runBlocking { getLastQuote(fromCurrency, toCurrency) }
-    
+
     /** See [getLastQuoteBlocking] */
-    fun getLastQuote(fromCurrency: String, toCurrency: String, callback: PolygonRestApiCallback<LastQuoteForexDTO>) =
+    fun getLastQuote(
+        fromCurrency: String,
+        toCurrency: String,
+        callback: PolygonRestApiCallback<LastQuoteForexDTO>
+    ) =
         coroutineToRestCallback(callback, { getLastQuote(fromCurrency, toCurrency) })
-    
+
     /**
      * Snapshot allows you to see all tickers current minute aggregate, daily aggregate and last trade.
      * As well as previous days aggregate and calculated change for today.
@@ -62,7 +74,7 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getSnapshotAllTickersBlocking(): SnapshotForexTickersDTO =
         runBlocking { getSnapshotAllTickers() }
-    
+
     /** See [getSnapshotAllTickersBlocking] */
     fun getSnapshotAllTickers(callback: PolygonRestApiCallback<SnapshotForexTickersDTO>) =
         coroutineToRestCallback(callback, { getSnapshotAllTickers() })
@@ -74,9 +86,12 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getSnapshotGainersOrLosersBlocking(direction: GainersOrLosersDirection): SnapshotForexTickersDTO =
         runBlocking { getSnapshotGainersOrLosers(direction) }
-    
+
     /** See [getSnapshotGainersOrLosersBlocking] */
-    fun getSnapshotGainersOrLosers(direction: GainersOrLosersDirection, callback: PolygonRestApiCallback<SnapshotForexTickersDTO>) =
+    fun getSnapshotGainersOrLosers(
+        direction: GainersOrLosersDirection,
+        callback: PolygonRestApiCallback<SnapshotForexTickersDTO>
+    ) =
         coroutineToRestCallback(callback, { getSnapshotGainersOrLosers(direction) })
 
 }

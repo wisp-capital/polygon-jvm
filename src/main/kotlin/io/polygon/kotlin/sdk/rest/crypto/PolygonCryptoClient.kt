@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package io.polygon.kotlin.sdk.rest.crypto
 
 import io.polygon.kotlin.sdk.ext.coroutineToRestCallback
@@ -21,7 +23,7 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getSupportedExchangesBlocking(): List<CryptoExchangeDTO> =
         runBlocking { getSupportedExchanges() }
-    
+
     /** See [getSupportedExchangesBlocking] */
     fun getSupportedExchanges(callback: PolygonRestApiCallback<List<CryptoExchangeDTO>>) =
         coroutineToRestCallback(callback, { getSupportedExchanges() })
@@ -33,11 +35,15 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getLastTradeBlocking(from: String, to: String): CryptoLastTradeDTO =
         runBlocking { getLastTrade(from, to) }
-    
+
     /** See [getLastTradeBlocking] */
-    fun getLastTrade(from: String, to: String, callback: PolygonRestApiCallback<CryptoLastTradeDTO>) =
+    fun getLastTrade(
+        from: String,
+        to: String,
+        callback: PolygonRestApiCallback<CryptoLastTradeDTO>
+    ) =
         coroutineToRestCallback(callback, { getLastTrade(from, to) })
-    
+
     /**
      * Get the open, close prices of a symbol on a certain day.
      *
@@ -45,11 +51,14 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getDailyOpenCloseBlocking(params: CryptoDailyOpenCloseParameters): CryptoDailyOpenCloseDTO =
         runBlocking { getDailyOpenClose(params) }
-    
+
     /** See [getDailyOpenCloseBlocking] */
-    fun getDailyOpenClose(params: CryptoDailyOpenCloseParameters, callback: PolygonRestApiCallback<CryptoDailyOpenCloseDTO>) =
+    fun getDailyOpenClose(
+        params: CryptoDailyOpenCloseParameters,
+        callback: PolygonRestApiCallback<CryptoDailyOpenCloseDTO>
+    ) =
         coroutineToRestCallback(callback, { getDailyOpenClose(params) })
-    
+
     /**
      * Get historic trade ticks for a crypto pair.
      *
@@ -57,9 +66,12 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getHistoricTradesBlocking(params: HistoricCryptoTradesParameters): HistoricCryptoTradesDTO =
         runBlocking { getHistoricTrades(params) }
-    
+
     /** See [getHistoricTradesBlocking] */
-    fun getHistoricTrades(params: HistoricCryptoTradesParameters, callback: PolygonRestApiCallback<HistoricCryptoTradesDTO>) =
+    fun getHistoricTrades(
+        params: HistoricCryptoTradesParameters,
+        callback: PolygonRestApiCallback<HistoricCryptoTradesDTO>
+    ) =
         coroutineToRestCallback(callback, { getHistoricTrades(params) })
 
     /**
@@ -71,11 +83,11 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getSnapshotAllTickersBlocking(): CryptoMultiTickerSnapshotDTO =
         runBlocking { getSnapshotAllTickers() }
-    
+
     /** See [getSnapshotAllTickersBlocking] */
     fun getSnapshotAllTickers(callback: PolygonRestApiCallback<CryptoMultiTickerSnapshotDTO>) =
         coroutineToRestCallback(callback, { getSnapshotAllTickers() })
-    
+
     /**
      * See the current snapshot of a single ticker
      *
@@ -83,9 +95,12 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getSnapshotSingleTickerBlocking(ticker: String): CryptoSingleTickerSnapshotDTO =
         runBlocking { getSnapshotSingleTicker(ticker) }
-    
+
     /** See [getSnapshotSingleTickerBlocking] */
-    fun getSnapshotSingleTicker(ticker: String, callback: PolygonRestApiCallback<CryptoSingleTickerSnapshotDTO>) =
+    fun getSnapshotSingleTicker(
+        ticker: String,
+        callback: PolygonRestApiCallback<CryptoSingleTickerSnapshotDTO>
+    ) =
         coroutineToRestCallback(callback, { getSnapshotSingleTicker(ticker) })
 
     /**
@@ -95,11 +110,14 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getSnapshotGainersOrLosersBlocking(direction: GainersOrLosersDirection): CryptoMultiTickerSnapshotDTO =
         runBlocking { getSnapshotGainersOrLosers(direction) }
-    
+
     /** See [getSnapshotGainersOrLosersBlocking] */
-    fun getSnapshotGainersOrLosers(direction: GainersOrLosersDirection, callback: PolygonRestApiCallback<CryptoMultiTickerSnapshotDTO>) =
+    fun getSnapshotGainersOrLosers(
+        direction: GainersOrLosersDirection,
+        callback: PolygonRestApiCallback<CryptoMultiTickerSnapshotDTO>
+    ) =
         coroutineToRestCallback(callback, { getSnapshotGainersOrLosers(direction) })
-    
+
     /**
      * See the current level 2 book of a single ticker. This is the combined book from all the exchanges.
      *
@@ -107,8 +125,11 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getL2SnapshotSingleTickerBlocking(ticker: String): CryptoTickerL2SnapshotResponseDTO =
         runBlocking { getL2SnapshotSingleTicker(ticker) }
-    
+
     /** See [getL2SnapshotSingleTickerBlocking] */
-    fun getL2SnapshotSingleTicker(ticker: String, callback: PolygonRestApiCallback<CryptoTickerL2SnapshotResponseDTO>) =
+    fun getL2SnapshotSingleTicker(
+        ticker: String,
+        callback: PolygonRestApiCallback<CryptoTickerL2SnapshotResponseDTO>
+    ) =
         coroutineToRestCallback(callback, { getL2SnapshotSingleTicker(ticker) })
 }

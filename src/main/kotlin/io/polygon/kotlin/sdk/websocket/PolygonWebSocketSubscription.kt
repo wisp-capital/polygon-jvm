@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package io.polygon.kotlin.sdk.websocket
 
 /**
@@ -7,7 +9,7 @@ data class PolygonWebSocketSubscription(
     val channel: PolygonWebSocketChannel,
     val symbol: String
 ) {
-    override fun toString() = "${channel.prefix}.$symbol"
+    override fun toString(): String = "${channel.prefix}.$symbol"
 }
 
 /**
@@ -19,8 +21,8 @@ sealed class PolygonWebSocketChannel(val prefix: String) {
      * Usable in the [PolygonWebSocketCluster.Stocks] cluster
      */
     sealed class Stocks(channelPrefix: String) : PolygonWebSocketChannel(channelPrefix) {
-        object Trades: Stocks("T")
-        object Quotes: Stocks("Q")
+        object Trades : Stocks("T")
+        object Quotes : Stocks("Q")
         object AggPerSecond : Stocks("A")
         object AggPerMinute : Stocks("AM")
     }
@@ -29,11 +31,11 @@ sealed class PolygonWebSocketChannel(val prefix: String) {
      * Usable in the [PolygonWebSocketCluster.Forex] cluster
      */
     sealed class Forex(channelPrefix: String) : PolygonWebSocketChannel(channelPrefix) {
-        object Quotes: Forex("C")
-        object AggPerMinute: Forex("CA")
-        object Bonds: Forex("BONDS")
-        object Commodities: Forex("COMMODITIES")
-        object Metals: Forex("METALS")
+        object Quotes : Forex("C")
+        object AggPerMinute : Forex("CA")
+        object Bonds : Forex("BONDS")
+        object Commodities : Forex("COMMODITIES")
+        object Metals : Forex("METALS")
     }
 
     /**

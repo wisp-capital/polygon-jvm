@@ -1,24 +1,68 @@
 package io.polygon.kotlin.sdk.rest.crypto
 
+import io.ktor.http.*
 import io.polygon.kotlin.sdk.rest.stocks.GainersOrLosersDirection
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /** See [PolygonCryptoClient.getSnapshotAllTickersBlocking] */
 suspend fun PolygonCryptoClient.getSnapshotAllTickers(): CryptoMultiTickerSnapshotDTO =
-    polygonClient.fetchResult { path("v2", "snapshot", "locale", "global", "markets", "crypto", "tickers") }
+    polygonClient.fetchResult {
+        path(
+            "v2",
+            "snapshot",
+            "locale",
+            "global",
+            "markets",
+            "crypto",
+            "tickers"
+        )
+    }
 
 /** See [PolygonCryptoClient.getSnapshotSingleTickerBlocking] */
 suspend fun PolygonCryptoClient.getSnapshotSingleTicker(ticker: String): CryptoSingleTickerSnapshotDTO =
-    polygonClient.fetchResult { path("v2", "snapshot", "locale", "global", "markets", "crypto", "tickers", ticker) }
+    polygonClient.fetchResult {
+        path(
+            "v2",
+            "snapshot",
+            "locale",
+            "global",
+            "markets",
+            "crypto",
+            "tickers",
+            ticker
+        )
+    }
 
 /** See [PolygonCryptoClient.getSnapshotGainersOrLosersBlocking] */
 suspend fun PolygonCryptoClient.getSnapshotGainersOrLosers(direction: GainersOrLosersDirection): CryptoMultiTickerSnapshotDTO =
-    polygonClient.fetchResult { path("v2", "snapshot", "locale", "global", "markets", "crypto", direction.queryParamValue) }
+    polygonClient.fetchResult {
+        path(
+            "v2",
+            "snapshot",
+            "locale",
+            "global",
+            "markets",
+            "crypto",
+            direction.queryParamValue
+        )
+    }
 
 /** See [PolygonCryptoClient.getL2SnapshotSingleTickerBlocking] */
 suspend fun PolygonCryptoClient.getL2SnapshotSingleTicker(ticker: String): CryptoTickerL2SnapshotResponseDTO =
-    polygonClient.fetchResult { path("v2", "snapshot", "locale", "global", "markets", "crypto", "tickers", ticker, "book") }
+    polygonClient.fetchResult {
+        path(
+            "v2",
+            "snapshot",
+            "locale",
+            "global",
+            "markets",
+            "crypto",
+            "tickers",
+            ticker,
+            "book"
+        )
+    }
 
 @Serializable
 data class CryptoMultiTickerSnapshotDTO(

@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package io.polygon.kotlin.sdk.websocket
 
 interface PolygonWebSocketListener {
@@ -13,8 +15,8 @@ interface PolygonWebSocketListener {
  * Extend this class to implement only the callbacks you care about
  */
 open class DefaultPolygonWebSocketListener : PolygonWebSocketListener {
-    override fun onAuthenticated(client: PolygonWebSocketClient) { }
-    override fun onReceive(client: PolygonWebSocketClient, message: PolygonWebSocketMessage) { }
-    override fun onDisconnect(client: PolygonWebSocketClient) { }
-    override fun onError(client: PolygonWebSocketClient, error: Throwable) { }
+    override fun onAuthenticated(client: PolygonWebSocketClient) {}
+    override fun onReceive(client: PolygonWebSocketClient, message: PolygonWebSocketMessage) {}
+    override fun onDisconnect(client: PolygonWebSocketClient) {}
+    override fun onError(client: PolygonWebSocketClient, error: Throwable) {}
 }

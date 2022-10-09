@@ -1,8 +1,11 @@
+@file:Suppress("unused")
+
 package io.polygon.kotlin.sdk.rest
 
-import io.ktor.client.HttpClient
-import io.ktor.client.request.get
-import io.ktor.http.URLBuilder
+import io.ktor.client.*
+import io.ktor.client.call.*
+import io.ktor.client.request.*
+import io.ktor.http.*
 import io.polygon.kotlin.sdk.DefaultJvmHttpClientProvider
 import io.polygon.kotlin.sdk.HttpClientProvider
 import io.polygon.kotlin.sdk.ext.coroutineToRestCallback
@@ -62,7 +65,10 @@ constructor(
         runBlocking { getAggregates(params) }
 
     /** See [getAggregatesBlocking] */
-    fun getAggregates(params: AggregatesParameters, callback: PolygonRestApiCallback<AggregatesDTO>) =
+    fun getAggregates(
+        params: AggregatesParameters,
+        callback: PolygonRestApiCallback<AggregatesDTO>
+    ) =
         coroutineToRestCallback(callback, { getAggregates(params) })
 
     /**
@@ -75,7 +81,10 @@ constructor(
         runBlocking { getGroupedDailyAggregates(params) }
 
     /** See [getGroupedDailyAggregatesBlocking] */
-    fun getGroupedDailyAggregates(params: GroupedDailyParameters, callback: PolygonRestApiCallback<AggregatesDTO>) =
+    fun getGroupedDailyAggregates(
+        params: GroupedDailyParameters,
+        callback: PolygonRestApiCallback<AggregatesDTO>
+    ) =
         coroutineToRestCallback(callback, { getGroupedDailyAggregates(params) })
 
 
@@ -85,14 +94,11 @@ constructor(
             parameters["apiKey"] = apiKey
         }
 
-    private inline fun <R> withHttpClient(codeBlock: (client: HttpClient) -> R) =
-        httpClientProvider.buildClient().use(codeBlock)
-
     internal suspend inline fun <reified T> fetchResult(
         urlBuilderBlock: URLBuilder.() -> Unit
     ): T {
         val url = baseUrlBuilder.apply(urlBuilderBlock).build()
-        return withHttpClient { httpClient -> httpClient.get(url) }
+        return httpClientProvider.buildClient().get(url).body()
     }
 
 }

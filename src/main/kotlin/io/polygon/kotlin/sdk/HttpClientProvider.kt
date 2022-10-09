@@ -3,10 +3,10 @@ package io.polygon.kotlin.sdk
 import io.ktor.client.*
 import io.ktor.client.engine.*
 import io.ktor.client.engine.okhttp.*
-import io.ktor.client.features.json.JsonFeature
-import io.ktor.client.features.json.serializer.*
-import io.ktor.client.features.websocket.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.plugins.websocket.*
 import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 
@@ -29,7 +29,7 @@ constructor(
     private val networkInterceptors: List<Interceptor> = emptyList()
 ) : DefaultJvmHttpClientProvider() {
 
-    override fun buildEngine() =
+    override fun buildEngine(): HttpClientEngine =
         OkHttp.create {
             applicationInterceptors.forEach(::addInterceptor)
             networkInterceptors.forEach(::addNetworkInterceptor)
@@ -52,18 +52,19 @@ constructor(
 
     open fun buildEngine(): HttpClientEngine = engine
 
-    override fun buildClient() =
+    override fun buildClient(): HttpClient =
         HttpClient(buildEngine()) {
             install(WebSockets)
-            install(JsonFeature) {
-                serializer = KotlinxSerializer(Json {
+            install(ContentNegotiation) {
+                json(Json {
+                    prettyPrint = true
                     isLenient = true
                     ignoreUnknownKeys = true
                 })
             }
         }
 
-    override fun getDefaultRestURLBuilder() =
+    override fun getDefaultRestURLBuilder(): URLBuilder =
         URLBuilder(
             protocol = URLProtocol.HTTPS,
             port = DEFAULT_PORT

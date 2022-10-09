@@ -2,12 +2,14 @@ package io.polygon.kotlin.sdk.ext
 
 import io.polygon.kotlin.sdk.rest.PolygonRestApiCallback
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 /**
  * Takes in a suspend function and exposes it as an async function with callbacks
  */
+@OptIn(DelicateCoroutinesApi::class)
 internal inline fun <T> coroutineToRestCallback(
     callback: PolygonRestApiCallback<T>,
     crossinline suspendingFunc: suspend () -> T,

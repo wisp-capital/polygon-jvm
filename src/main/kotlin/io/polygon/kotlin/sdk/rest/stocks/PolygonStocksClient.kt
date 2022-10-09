@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package io.polygon.kotlin.sdk.rest.stocks
 
 import io.polygon.kotlin.sdk.ext.coroutineToRestCallback
@@ -20,11 +22,11 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getSupportedExchangesBlocking(): List<ExchangeDTO> =
         runBlocking { getSupportedExchanges() }
-    
+
     /** See [getSupportedExchangesBlocking] */
     fun getSupportedExchanges(callback: PolygonRestApiCallback<List<ExchangeDTO>>) =
         coroutineToRestCallback(callback, { getSupportedExchanges() })
- 
+
     /**
      * Get historic trades for a ticker.
      *
@@ -32,11 +34,14 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getHistoricTradesBlocking(params: HistoricTradesParameters): HistoricTradesDTO =
         runBlocking { getHistoricTrades(params) }
-    
+
     /** See [getHistoricTradesBlocking] */
-    fun getHistoricTrades(params: HistoricTradesParameters, callback: PolygonRestApiCallback<HistoricTradesDTO>) =
+    fun getHistoricTrades(
+        params: HistoricTradesParameters,
+        callback: PolygonRestApiCallback<HistoricTradesDTO>
+    ) =
         coroutineToRestCallback(callback, { getHistoricTrades(params) })
-    
+
     /**
      * Get historic NBBO quotes for a ticker.
      *
@@ -44,9 +49,12 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getHistoricQuotesBlocking(params: HistoricQuotesParameters): HistoricQuotesDTO =
         runBlocking { getHistoricQuotes(params) }
-    
+
     /** See [getHistoricQuotesBlocking] */
-    fun getHistoricQuotes(params: HistoricQuotesParameters, callback: PolygonRestApiCallback<HistoricQuotesDTO>) =
+    fun getHistoricQuotes(
+        params: HistoricQuotesParameters,
+        callback: PolygonRestApiCallback<HistoricQuotesDTO>
+    ) =
         coroutineToRestCallback(callback, { getHistoricQuotes(params) })
 
     /**
@@ -56,7 +64,7 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getLastTradeBlocking(symbol: String): LastTradeResultDTO =
         runBlocking { getLastTrade(symbol) }
-    
+
     /** See [getLastTradeBlocking] */
     fun getLastTrade(symbol: String, callback: PolygonRestApiCallback<LastTradeResultDTO>) =
         coroutineToRestCallback(callback, { getLastTrade(symbol) })
@@ -68,22 +76,31 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getLastQuoteBlocking(symbol: String): LastQuoteResultDTO =
         runBlocking { getLastQuote(symbol) }
-    
+
     /** See [getLastQuoteBlocking] */
     fun getLastQuote(symbol: String, callback: PolygonRestApiCallback<LastQuoteResultDTO>) =
         coroutineToRestCallback(callback, { getLastQuote(symbol) })
-    
+
     /**
      * Get the open, close and afterhours prices of a symbol on a certain date.
      * @param date The date to get the open, close and after hours prices for (YYYY-MM-DD)
      *
      * API Doc: https://polygon.io/docs/#!/Stocks--Equities/get_v1_open_close_symbol_date
      */
-    fun getDailyOpenCloseBlocking(symbol: String, date: String, unadjusted: Boolean): DailyOpenCloseDTO =
+    fun getDailyOpenCloseBlocking(
+        symbol: String,
+        date: String,
+        unadjusted: Boolean
+    ): DailyOpenCloseDTO =
         runBlocking { getDailyOpenClose(symbol, date, unadjusted) }
-    
+
     /** See [getDailyOpenCloseBlocking] */
-    fun getDailyOpenClose(symbol: String, date: String, unadjusted: Boolean, callback: PolygonRestApiCallback<DailyOpenCloseDTO>) =
+    fun getDailyOpenClose(
+        symbol: String,
+        date: String,
+        unadjusted: Boolean,
+        callback: PolygonRestApiCallback<DailyOpenCloseDTO>
+    ) =
         coroutineToRestCallback(callback, { getDailyOpenClose(symbol, date, unadjusted) })
 
     /**
@@ -93,9 +110,12 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getConditionMappingsBlocking(tickType: ConditionMappingTickerType): Map<String, String> =
         runBlocking { getConditionMappings(tickType) }
-    
+
     /** See [getConditionMappingsBlocking] */
-    fun getConditionMappings(tickType: ConditionMappingTickerType, callback: PolygonRestApiCallback<Map<String, String>>) =
+    fun getConditionMappings(
+        tickType: ConditionMappingTickerType,
+        callback: PolygonRestApiCallback<Map<String, String>>
+    ) =
         coroutineToRestCallback(callback, { getConditionMappings(tickType) })
 
     /**
@@ -107,7 +127,7 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getSnapshotAllTickersBlocking(): SnapshotAllTickersDTO =
         runBlocking { getSnapshotAllTickers() }
-    
+
     /** See [getSnapshotAllTickersBlocking] */
     fun getSnapshotAllTickers(callback: PolygonRestApiCallback<SnapshotAllTickersDTO>) =
         coroutineToRestCallback(callback, { getSnapshotAllTickers() })
@@ -119,7 +139,7 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getSnapshotBlocking(symbol: String): SnapshotSingleTickerDTO =
         runBlocking { getSnapshot(symbol) }
-    
+
     /** See [getSnapshotBlocking] */
     fun getSnapshot(symbol: String, callback: PolygonRestApiCallback<SnapshotSingleTickerDTO>) =
         coroutineToRestCallback(callback, { getSnapshot(symbol) })
@@ -131,9 +151,12 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getSnapshotGainersOrLosersBlocking(direction: GainersOrLosersDirection): SnapshotGainersOrLosersDTO =
         runBlocking { getSnapshotGainersOrLosers(direction) }
-    
+
     /** See [getSnapshotGainersOrLosersBlocking] */
-    fun getSnapshotGainersOrLosers(direction: GainersOrLosersDirection, callback: PolygonRestApiCallback<SnapshotGainersOrLosersDTO>) =
+    fun getSnapshotGainersOrLosers(
+        direction: GainersOrLosersDirection,
+        callback: PolygonRestApiCallback<SnapshotGainersOrLosersDTO>
+    ) =
         coroutineToRestCallback(callback, { getSnapshotGainersOrLosers(direction) })
 
     /**
@@ -147,7 +170,11 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
         runBlocking { getPreviousClose(symbol, unadjusted) }
 
     /** See [getPreviousCloseBlocking] */
-    fun getPreviousClose(symbol: String, unadjusted: Boolean, callback: PolygonRestApiCallback<PreviousCloseDTO>) =
+    fun getPreviousClose(
+        symbol: String,
+        unadjusted: Boolean,
+        callback: PolygonRestApiCallback<PreviousCloseDTO>
+    ) =
         coroutineToRestCallback(callback, { getPreviousClose(symbol, unadjusted) })
 
 }

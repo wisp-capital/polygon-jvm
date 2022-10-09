@@ -1,10 +1,15 @@
 package io.polygon.kotlin.sdk.rest.stocks
 
+import io.ktor.http.*
 import kotlinx.serialization.Serializable
 
 /** See [PolygonStocksClient.getDailyOpenCloseBlocking] */
-suspend fun PolygonStocksClient.getDailyOpenClose(symbol: String, date: String, unadjusted: Boolean): DailyOpenCloseDTO =
-    polygonClient.fetchResult { 
+suspend fun PolygonStocksClient.getDailyOpenClose(
+    symbol: String,
+    date: String,
+    unadjusted: Boolean
+): DailyOpenCloseDTO =
+    polygonClient.fetchResult {
         path("v1", "open-close", symbol, date)
         parameters["unadjusted"] = unadjusted.toString()
     }

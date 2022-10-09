@@ -1,5 +1,6 @@
 package io.polygon.kotlin.sdk.rest.forex
 
+import io.ktor.http.*
 import io.polygon.kotlin.sdk.rest.stocks.GainersOrLosersDirection
 import io.polygon.kotlin.sdk.rest.stocks.SnapshotAggregateDTO
 import kotlinx.serialization.SerialName
@@ -7,11 +8,31 @@ import kotlinx.serialization.Serializable
 
 /** See [PolygonForexClient.getSnapshotAllTickersBlocking] */
 suspend fun PolygonForexClient.getSnapshotAllTickers(): SnapshotForexTickersDTO =
-    polygonClient.fetchResult { path("v2", "snapshot", "locale", "global", "markets", "forex", "tickers") }
+    polygonClient.fetchResult {
+        path(
+            "v2",
+            "snapshot",
+            "locale",
+            "global",
+            "markets",
+            "forex",
+            "tickers"
+        )
+    }
 
 /** See [PolygonForexClient.getSnapshotGainersOrLosersBlocking] */
 suspend fun PolygonForexClient.getSnapshotGainersOrLosers(direction: GainersOrLosersDirection): SnapshotForexTickersDTO =
-    polygonClient.fetchResult { path("v2", "snapshot", "locale", "global", "markets", "forex", direction.queryParamValue) }
+    polygonClient.fetchResult {
+        path(
+            "v2",
+            "snapshot",
+            "locale",
+            "global",
+            "markets",
+            "forex",
+            direction.queryParamValue
+        )
+    }
 
 @Serializable
 data class SnapshotForexTickersDTO(

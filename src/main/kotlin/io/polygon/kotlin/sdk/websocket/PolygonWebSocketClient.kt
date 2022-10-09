@@ -1,10 +1,13 @@
+@file:Suppress("unused")
+
 package io.polygon.kotlin.sdk.websocket
 
 import io.ktor.client.*
-import io.ktor.client.features.websocket.*
+import io.ktor.client.plugins.websocket.*
 import io.ktor.client.request.*
 import io.ktor.http.*
-import io.ktor.http.cio.websocket.*
+//import io.ktor.http.cio.websocket.*
+import io.ktor.websocket.*
 import io.polygon.kotlin.sdk.DefaultJvmHttpClientProvider
 import io.polygon.kotlin.sdk.HttpClientProvider
 import io.polygon.kotlin.sdk.ext.PolygonCompletionCallback
@@ -71,6 +74,7 @@ constructor(
      * This should be set before connecting to the websocket
      * For info on coroutines, see here: https://kotlinlang.org/docs/reference/coroutines/coroutines-guide.html
      */
+    @OptIn(DelicateCoroutinesApi::class)
     var coroutineScope: CoroutineScope = GlobalScope
 
 
@@ -136,7 +140,10 @@ constructor(
         runBlocking { subscribe(subscriptions) }
 
     /** Async/callback version of [subscribe] */
-    fun subscribeAsync(subscriptions: List<PolygonWebSocketSubscription>, callback: PolygonCompletionCallback?) =
+    fun subscribeAsync(
+        subscriptions: List<PolygonWebSocketSubscription>,
+        callback: PolygonCompletionCallback?
+    ) =
         coroutineToCompletionCallback(callback, coroutineScope) { subscribe(subscriptions) }
 
     /**
@@ -157,7 +164,10 @@ constructor(
         runBlocking { unsubscribe(subscriptions) }
 
     /** Callback/async version of [unsubscribe] */
-    fun unsubscribeAsync(subsciptions: List<PolygonWebSocketSubscription>, callback: PolygonCompletionCallback?) =
+    fun unsubscribeAsync(
+        subsciptions: List<PolygonWebSocketSubscription>,
+        callback: PolygonCompletionCallback?
+    ) =
         coroutineToCompletionCallback(callback, coroutineScope) { unsubscribe(subsciptions) }
 
     /**
@@ -179,7 +189,7 @@ constructor(
     fun disconnectAsync(callback: PolygonCompletionCallback?) =
         coroutineToCompletionCallback(callback, coroutineScope) { disconnect() }
 
-    private suspend fun processFrame(frame: Frame) {
+    private fun processFrame(frame: Frame) {
         try {
             if (activeConnection?.isAuthenticated == false) {
                 if (parseAuthenticationFrame(frame)) {
@@ -214,14 +224,30 @@ constructor(
                 "status" -> serializer.decodeFromJsonElement(StatusMessage.serializer(), frame)
                 "T" -> serializer.decodeFromJsonElement(StocksMessage.Trade.serializer(), frame)
                 "Q" -> serializer.decodeFromJsonElement(StocksMessage.Quote.serializer(), frame)
-                "A", "AM" -> serializer.decodeFromJsonElement(StocksMessage.Aggregate.serializer(), frame)
+                "A", "AM" -> serializer.decodeFromJsonElement(
+                    StocksMessage.Aggregate.serializer(),
+                    frame
+                )
+
                 "C" -> serializer.decodeFromJsonElement(ForexMessage.Quote.serializer(), frame)
                 "CA" -> serializer.decodeFromJsonElement(ForexMessage.Aggregate.serializer(), frame)
                 "XQ" -> serializer.decodeFromJsonElement(CryptoMessage.Quote.serializer(), frame)
                 "XT" -> serializer.decodeFromJsonElement(CryptoMessage.Trade.serializer(), frame)
-                "XA" -> serializer.decodeFromJsonElement(CryptoMessage.Aggregate.serializer(), frame)
-                "XS" -> serializer.decodeFromJsonElement(CryptoMessage.ConsolidatedQuote.serializer(), frame)
-                "XL2" -> serializer.decodeFromJsonElement(CryptoMessage.Level2Tick.serializer(), frame)
+                "XA" -> serializer.decodeFromJsonElement(
+                    CryptoMessage.Aggregate.serializer(),
+                    frame
+                )
+
+                "XS" -> serializer.decodeFromJsonElement(
+                    CryptoMessage.ConsolidatedQuote.serializer(),
+                    frame
+                )
+
+                "XL2" -> serializer.decodeFromJsonElement(
+                    CryptoMessage.Level2Tick.serializer(),
+                    frame
+                )
+
                 else -> RawMessage(frame.toString().toByteArray())
             }
             collector.add(message)

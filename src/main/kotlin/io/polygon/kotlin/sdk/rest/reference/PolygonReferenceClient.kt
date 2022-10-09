@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package io.polygon.kotlin.sdk.rest.reference
 
 import io.polygon.kotlin.sdk.ext.coroutineToRestCallback
@@ -106,11 +108,11 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getStockSplitsBlocking(symbol: String): StockSplitsDTO =
         runBlocking { getStockSplits(symbol) }
-    
+
     /** See [getStockSplitsBlocking] */
-    fun getStockSplits(symbol: String, callback: PolygonRestApiCallback<StockSplitsDTO>) =
+    fun getStockSplits(symbol: String, callback: PolygonRestApiCallback<StockSplitsDTO>): Unit =
         coroutineToRestCallback(callback, { getStockSplits(symbol) })
-    
+
     /**
      * Gets the historical dividends for a symbol
      *
@@ -118,11 +120,14 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getStockDividendsBlocking(symbol: String): StockDividendsDTO =
         runBlocking { getStockDividends(symbol) }
-    
+
     /** See [getStockDividendsBlocking] */
-    fun getStockDividends(symbol: String, callback: PolygonRestApiCallback<StockDividendsDTO>) =
+    fun getStockDividends(
+        symbol: String,
+        callback: PolygonRestApiCallback<StockDividendsDTO>
+    ): Unit =
         coroutineToRestCallback(callback, { getStockDividends(symbol) })
-    
+
     /**
      * Gets the historical financials for a symbol
      *
@@ -130,9 +135,12 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getStockFinancialsBlocking(params: StockFinancialsParameters): StockFinancialsResultsDTO =
         runBlocking { getStockFinancials(params) }
-    
+
     /** See [getStockFinancialsBlocking] */
-    fun getStockFinancials(params: StockFinancialsParameters, callback: PolygonRestApiCallback<StockFinancialsResultsDTO>) =
+    fun getStockFinancials(
+        params: StockFinancialsParameters,
+        callback: PolygonRestApiCallback<StockFinancialsResultsDTO>
+    ) =
         coroutineToRestCallback(callback, { getStockFinancials(params) })
 
     /**
@@ -142,11 +150,11 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getMarketStatusBlocking(): MarketStatusDTO =
         runBlocking { getMarketStatus() }
-    
+
     /** See [getMarketStatusBlocking] */
-    fun getMarketStatus(callback: PolygonRestApiCallback<MarketStatusDTO>) =
+    fun getMarketStatus(callback: PolygonRestApiCallback<MarketStatusDTO>): Unit =
         coroutineToRestCallback(callback, { getMarketStatus() })
-    
+
     /**
      * Get upcoming market holidays and their open/close times
      *
@@ -154,8 +162,8 @@ internal constructor(internal val polygonClient: PolygonRestClient) {
      */
     fun getMarketHolidaysBlocking(): List<MarketHolidayDTO> =
         runBlocking { getMarketHolidays() }
-    
+
     /** See [getMarketHolidaysBlocking] */
-    fun getMarketHolidays(callback: PolygonRestApiCallback<List<MarketHolidayDTO>>) =
+    fun getMarketHolidays(callback: PolygonRestApiCallback<List<MarketHolidayDTO>>): Unit =
         coroutineToRestCallback(callback, { getMarketHolidays() })
 }

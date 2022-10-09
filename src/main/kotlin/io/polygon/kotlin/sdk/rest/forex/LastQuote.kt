@@ -1,9 +1,13 @@
 package io.polygon.kotlin.sdk.rest.forex
 
+import io.ktor.http.*
 import kotlinx.serialization.Serializable
 
 /** See [PolygonForexClient.getLastQuoteBlocking] */
-suspend fun PolygonForexClient.getLastQuote(fromCurrency: String, toCurrency: String): LastQuoteForexDTO =
+suspend fun PolygonForexClient.getLastQuote(
+    fromCurrency: String,
+    toCurrency: String
+): LastQuoteForexDTO =
     polygonClient.fetchResult { path("v1", "last_quote", "currencies", fromCurrency, toCurrency) }
 
 @Serializable

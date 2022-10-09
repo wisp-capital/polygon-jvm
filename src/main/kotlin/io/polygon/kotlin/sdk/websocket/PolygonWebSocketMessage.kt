@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package io.polygon.kotlin.sdk.websocket
 
 import kotlinx.serialization.SerialName
