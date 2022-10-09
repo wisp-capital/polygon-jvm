@@ -22,7 +22,7 @@ repositories {
     maven { url = uri("https://jitpack.io") }
 }
 
-group = "com.github.mmoghaddam385"
+group = "com.github.polygon-io"
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20")
@@ -42,3 +42,20 @@ dependencies {
     testImplementation("junit:junit:4.12")
 }
 
+
+tasks {
+    compileKotlin {
+        kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    val sourcesJar by creating(Jar::class) {
+        dependsOn(JavaPlugin.CLASSES_TASK_NAME)
+        classifier = "sources"
+        from(sourceSets["main"].allSource)
+    }
+
+    artifacts {
+        add("archives", sourcesJar)
+        add("archives", jar)
+    }
+}
