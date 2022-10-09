@@ -9,6 +9,14 @@ and [WebSocket](https://polygon.io/sockets) APIs
 
 This fork is custom to my own needs, and is not intended to be used by anyone else.
 
+A few of the changes include
+
+* Latest Ktor
+* Latest Kotlin
+* Removed support for some amount of client custom engine - because I won't use it.
+
+I will likely add and remove functionality at will - for whatever suits my own work :).
+
 ## Features
 
 Everything you'd expect from a client SDK plus...
