@@ -10,6 +10,7 @@ buildscript {
     }
 }
 
+// REMINDER THAT THIS IS PUBLIC
 plugins {
     `java-library`
     kotlin("jvm") version "1.7.20"
@@ -30,7 +31,6 @@ dependencies {
     implementation("io.ktor:ktor-client-core:$ktorVersion")
     implementation("io.ktor:ktor-client-websockets:$ktorVersion")
     implementation("io.ktor:ktor-client-cio:$ktorVersion")
-//    implementation("io.ktor:ktor-client-resources:$ktorVersion")
     implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
