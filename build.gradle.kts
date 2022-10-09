@@ -15,11 +15,12 @@ plugins {
     `java-library`
     kotlin("jvm") version "1.7.20"
     kotlin("plugin.serialization") version "1.7.20"
+    `maven-publish`
 }
 
 repositories {
     mavenCentral()
-    maven { url = uri("https://jitpack.io") }
+    maven("https://jitpack.io")
 }
 
 group = "com.github.polygon-io"
@@ -40,6 +41,13 @@ dependencies {
     implementation("com.thinkinglogic.builder:kotlin-builder-annotation:$ktBuilderVersion")
 
     testImplementation("junit:junit:4.12")
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+        maven("https://jitpack.io")
+    }
 }
 
 
