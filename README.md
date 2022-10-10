@@ -17,6 +17,12 @@ A few of the changes include
 
 I will likely add and remove functionality at will - for whatever suits my own work :).
 
+
+Import in gradle - 
+```
+implementation("com.github.wisp-capital:polygon-jvm:3.0.4")
+```
+
 ## Features
 
 Everything you'd expect from a client SDK plus...
