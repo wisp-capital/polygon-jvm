@@ -23,6 +23,9 @@ Import in gradle -
 implementation("com.github.wisp-capital:polygon-jvm:3.0.4")
 ```
 
+### Note
+This is published to github using jitpack but will eventually be hosted on private auth repo on google.
+
 ## Features
 
 Everything you'd expect from a client SDK plus...
